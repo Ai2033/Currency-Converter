@@ -2,24 +2,24 @@ import requests
 from InquirerPy import prompt
 import json
 
-question1 = [
+question = [
     {
         "type": "list",
-        "message": "What's the currency you want to convert?",
+        "message": "\nWhat's the currency you want to convert?",
         "choices": ["INR", "USD", "EUR","JPY" ,"CNY","KRW","SGD","NZD","CAD","ZAR"]
     },
     {
         "type": "list",
-        "message": "What's the currency you want to convert into?",
+        "message": "\nWhat's the currency you want to convert into?",
         "choices": ["INR", "USD", "EUR","JPY" ,"CNY","KRW","SGD","NZD","CAD","ZAR"]
     }
 ]
-result = prompt(question1)
+result = prompt(question)
 cur1=result[0]
 cur2=result[1]
 
 
-amount=float(input("Enter the amount to convert :"))
+amount=float(input("\nEnter the amount to convert :"))
 
 url = 'https://api.exchangerate.host/convert'
 params = {'from': cur1, 'to': cur2}
@@ -29,9 +29,9 @@ data = response.json()
 
 if 'result' in data:
     rate = data['result']
-    print("The conversion rate from",cur1,"to",cur2, "is:", rate)
+    print("\nThe conversion rate from",cur1,"to",cur2, "is:", rate)
 else:
-    print("Failed to retrieve conversion rate")
+    print("\nFailed to retrieve conversion rate")
 
-print("Therefore the amount after conversion is:",amount*rate)
+print("\nTherefore the amount after conversion is:",amount*rate,"\n")
 
